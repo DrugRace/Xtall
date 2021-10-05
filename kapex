@@ -92,7 +92,7 @@ read -p "Enter NS Record: "  servernames
 function CreateRecord(){
     TMP_FILE2='/tmp/abonv2.txt'
     TMP_FILE3='/tmp/abonv3.txt'
-    curl -sX POST "https://api.cloudflare.com/client/v4/zones/$DOMAIN_ZONE_ID/dns_records" -H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $GLOBAL_API_KEY" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"$servername\",\"content\":\"$IPADDR\",\"ttl\":Auto,\"proxied\":false}" | python -m json.tool > "$TMP_FILE2"
+    curl -sX POST "https://api.cloudflare.com/client/v4/zones/$DOMAIN_ZONE_ID/dns_records" -H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $GLOBAL_API_KEY" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"$servername\",\"content\":\"$IPADDR\",\"ttl\":1,\"proxied\":false}" | python -m json.tool > "$TMP_FILE2"
 
     cat < "$TMP_FILE2" | jq '.result' | jq 'del(.meta)' | jq 'del(.created_on,.locked,.modified_on,.proxiable,.proxied,.ttl,.type,.zone_id,.zone_name)' > /tmp/abonv22.txt
     rm -f "$TMP_FILE2"
@@ -100,7 +100,7 @@ function CreateRecord(){
 
     MYDNS="$(cat < "$TMP_FILE2" | jq -r '.name')"
     MYDNS_ID="$(cat < "$TMP_FILE2" | jq -r '.id')"
-    curl -sX POST "https://api.cloudflare.com/client/v4/zones/$DOMAIN_ZONE_ID/dns_records" -H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $GLOBAL_API_KEY" -H "Content-Type: application/json" --data "{\"type\":\"NS\",\"name\":\"$servernames\",\"content\":\"$MYDNS\",\"ttl\":Auto,\"proxied\":false}" | python -m json.tool > "$TMP_FILE3"
+    curl -sX POST "https://api.cloudflare.com/client/v4/zones/$DOMAIN_ZONE_ID/dns_records" -H "X-Auth-Email: $CLOUDFLARE_EMAIL" -H "X-Auth-Key: $GLOBAL_API_KEY" -H "Content-Type: application/json" --data "{\"type\":\"NS\",\"name\":\"$servernames\",\"content\":\"$MYDNS\",\"ttl\":1,\"proxied\":false}" | python -m json.tool > "$TMP_FILE3"
 
     cat < "$TMP_FILE3" | jq '.result' | jq 'del(.meta)' | jq 'del(.created_on,.locked,.modified_on,.proxiable,.proxied,.ttl,.type,.zone_id,.zone_name)' > /tmp/abonv33.txt
     rm -f "$TMP_FILE3"
@@ -136,7 +136,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStar=/root/gvpnproxy -port 80 -tunnel 127.0.0.1:550 -response 101
+ExecStar=/root/proxy -port 80 -tunnel 127.0.0.1:550 -response 101
 Restart=on-failure
 
 [Install]
