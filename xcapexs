@@ -180,13 +180,13 @@ function slowdns() {
     startdns
 }
 slowdns
+echo '$MYDNS' >/root/gtmpayload.txt
 
 function ScriptMessage(){
  echo -e ""
- echo -e " \033[0;36m (｡◕‿◕｡)\033[0m \033[0;31mBon-Chan Installer\033[0m"
+ echo -e " \033[0;36m (｡◕‿◕｡)\033[0m \033[0;31mBon-Chan VPS Installer\033[0m"
  echo -e " \033[0;31m Edited by: \033[0m \033[0;36mJuan\033[0m"
  echo -e ""
-
 }
 ScriptMessage
 
@@ -196,8 +196,8 @@ ScriptMessage
  echo -e "\033[1;33m Installation Success\033[0m "
  echo -e ""
  echo -e "\033[1;33m YOUR DNS:\033[0m $MYDNS"
- echo -ne "\033[1;33m YOUR KEY:\033[0m " && cat /root/server.pub
  echo -ne "\033[1;33m YOUR NS:\033[0m " && cat /root/nameserver.txt
+ echo -ne "\033[1;33m YOUR KEY:\033[0m " && cat /root/server.pub
  echo -e ""
  echo -e "Please RUN this code after installation to finish SLOWDNS installation:"
  echo -ne "curl -sO https://raw.githubusercontent.com/xamjyss143/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && echo $(cat /root/nameserver.txt /root/server.pub)
