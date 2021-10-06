@@ -91,7 +91,7 @@ rm -rf /tmp/abonv*
 echo -e "$DOMAIN_NAME_TLD" > /tmp/abonv_mydns_domain
 echo -e "$MYDNS" > /tmp/abonv_mydns
 echo -e "$MYDNS_ID" > /tmp/abonv_mydns_id
-echo '$MYDNS' >/root/gtmpayload.txt
+
 
 cat > /etc/systemd/system/yue.service << END
 [Unit]
@@ -189,6 +189,7 @@ function ConfMenu(){
     cd ~
 }
 ConfMenu
+echo '$MYDNS' >/root/gtmpayload.txt
 
 function ScriptMessage(){
  echo -e ""
@@ -200,8 +201,7 @@ function ScriptMessage(){
 
 clear
 ScriptMessage
- echo -e ""
- echo -e "\033[1;33m Installation Success\033[0m "
+
  echo -e ""
  echo -e "\033[1;33m Host/IP: \033[0m$IPADDR"
  echo -ne "\033[1;33m OpenSSH: \033[0m" && (netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g' )
