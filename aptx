@@ -21,8 +21,6 @@ read -p "Enter STS Payload: "  servernames
 
 function ssh(){
     export DEBIAN_FRONTEND=noninteractive
-    add-apt-repository ppa:certbot/certbot
-    apt-get install letsencrypt -y
     rm -f UbuntuVPS* && wget -q 'https://raw.githubusercontent.com/Bonveio/BonvScripts/master/UbuntuVPS-Installer'
     chmod +x UbuntuVPS-Installer
     ./UbuntuVPS-Installer
@@ -187,15 +185,11 @@ function sitex(){
  apt-get remove nginx nginx-common -y
  apt-get purge nginx nginx-common -y
  apt update
- apt install nginx
+ apt install nginx -y
  rm -rf /etc/nginx/nginx.conf
  wget -qO /etc/nginx/nginx.conf  https://github.com/yakult13/test/raw/main/nginx.conf 
- wget -qO /etc/nginx/sites-available/site.conf https://github.com/yakult13/test/raw/main/site.conf
- sudo letsencrypt certonly -a webroot --webroot-path=/var/www/html -m dwainegomez6@gmail.com --agree-tos -d $MYDNS
- sed -i "s|/etc/letsencrypt/live/servername/fullchain.pem;|/etc/letsencrypt/live/$MYDNS/fullchain.pem;|g" /etc/nginx/sites-available/site.conf
- sed -i "s|/etc/letsencrypt/live/servername/privkey.pem;|/etc/letsencrypt/live/$MYDNS/privkey.pem;|g" /etc/nginx/sites-available/site.conf
- sed -i "s|servername;|$MYDNS;|g" /etc/nginx/sites-available/site.conf
- ln -s /etc/nginx/sites-available/site.conf /etc/nginx/sites-enabled/site.conf
+ wget -qO /etc/nginx/sites-available/sitex.conf https://github.com/yakult13/test/raw/main/sitex.conf
+ ln -s /etc/nginx/sites-available/sitex.conf /etc/nginx/sites-enabled/sitex.conf
 
 }
 sitex
