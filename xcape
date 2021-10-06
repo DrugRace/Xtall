@@ -39,7 +39,7 @@ function ConfMenu(){
     dos2unix ./* &> /dev/null
     cd ~
 }
-ConfM
+ConfMenu
 
 function extra() {
     echo -e "\033[1;33m Customizing for Freenet Cafe\033[0m"
