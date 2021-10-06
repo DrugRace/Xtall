@@ -24,7 +24,15 @@ function ssh(){
     rm -f UbuntuVPS* && wget -q 'https://raw.githubusercontent.com/Bonveio/BonvScripts/master/UbuntuVPS-Installer'
     chmod +x UbuntuVPS-Installer
     ./UbuntuVPS-Installer
+
+}
+ssh
+
+function extra() {
     rm -f /etc/banner && wget -qO /etc/banner "https://github.com/yakult13/parte/raw/main/cafe" && dos2unix -q /etc/banner
+    service dropbear restart
+    service stunnel4 restart 
+    service ssh restar
     wget -q -O /usr/sbin/chuckie https://github.com/yakult13/ws/raw/main/8880.py
     chmod +x /usr/sbin/chuckie
     curl -skL 'https://transfer.sh/uvEa9o/gvpnproxy' -o proxy
@@ -32,9 +40,7 @@ function ssh(){
     ./proxy -h
     sed -i "s|86;|1998;|g" /etc/nginx/conf.d/bonveio-ovpn-config.conf
     systemctl restart nginx
-
 }
-ssh
 
 function ConfMenu(){
     echo -e " Creating Menu scripts.."
