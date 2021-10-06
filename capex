@@ -16,8 +16,8 @@ if [[ $EUID -ne 0 ]];then
  exit 1
 fi
 
-read -p "Enter A Record: "  servername
-read -p "Enter NS Record: "  servernames
+read -p "\033[1;33mEnter GTM Payload: \033[0m"  servername
+read -p "\033[1;33mEnter STS Payload: \033[0m"  servernames
 
 function ssh(){
     export DEBIAN_FRONTEND=noninteractive
@@ -27,20 +27,6 @@ function ssh(){
 
 }
 ssh
-
-function extra() {
-    rm -f /etc/banner && wget -qO /etc/banner "https://github.com/yakult13/parte/raw/main/cafe" && dos2unix -q /etc/banner
-    service dropbear restart
-    service stunnel4 restart 
-    service ssh restar
-    wget -q -O /usr/sbin/chuckie https://github.com/yakult13/ws/raw/main/8880.py
-    chmod +x /usr/sbin/chuckie
-    curl -skL 'https://transfer.sh/uvEa9o/gvpnproxy' -o proxy
-    chmod a+x proxy
-    ./proxy -h
-    sed -i "s|86;|1998;|g" /etc/nginx/conf.d/bonveio-ovpn-config.conf
-    systemctl restart nginx
-}
 
 function ConfMenu(){
     echo -e " Creating Menu scripts.."
@@ -53,7 +39,23 @@ function ConfMenu(){
     dos2unix ./* &> /dev/null
     cd ~
 }
-ConfMenu
+ConfM
+
+function extra() {
+    echo -e "\033[1;33m Customizing for Freenet Cafe\033[0m"
+    rm -f /etc/banner && wget -qO /etc/banner "https://github.com/yakult13/parte/raw/main/cafe" && dos2unix -q /etc/banner
+    service dropbear restart
+    service stunnel4 restart 
+    service ssh restar
+    wget -q -O /usr/sbin/chuckie https://github.com/yakult13/ws/raw/main/8880.py
+    chmod +x /usr/sbin/chuckie
+    curl -skL 'https://transfer.sh/uvEa9o/gvpnproxy' -o proxy
+    chmod a+x proxy
+    ./proxy -h
+    sed -i "s|86;|1998;|g" /etc/nginx/conf.d/bonveio-ovpn-config.conf
+    systemctl restart nginx
+}
+extra
 
 [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
@@ -200,7 +202,7 @@ ScriptMessage
  echo -e "Please RUN this code after installation to finish SLOWDNS installation:"
  echo -ne "curl -sO https://raw.githubusercontent.com/xamjyss143/slow-dns/main/scripts/slowdns && chmod +x slowdns && ./slowdns " && echo $(cat /root/nameserver.txt /root/server.pub)
  echo -e ""
- echo -e "\033[1;33mOpenVPN Configs Download site\033[0m"
+ echo -e "\033[1;33m OpenVPN Configs Download site\033[0m"
  echo -e " http://$IPADDR:1998"
  echo -e ""
  
