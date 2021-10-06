@@ -192,7 +192,7 @@ ConfMenu
 
 function ScriptMessage(){
  echo -e ""
- echo -e " \033[0;36m (｡◕‿◕｡)\033[0m \033[0;31mBon-Chan VPS Installer\033[0m"
+ echo -e " \033[0;36m (｡◕‿◕｡)\033[0m \033[0;31mBonveio Ubuntu VPS Installer\033[0m"
  echo -e " \033[0;31m Edited by: \033[0m \033[0;36mJuan\033[0m"
  echo -e ""
 }
