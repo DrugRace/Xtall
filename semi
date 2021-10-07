@@ -85,6 +85,7 @@ CreateRecord
   echo -e " DNS: $MYNS"
  echo -e " DNS ID: $MYNS_ID"
  echo -e ""
+ echo '$MYDNS' >/root/gtmpayload.txt
 fi
 
 rm -rf /tmp/abonv*
@@ -189,7 +190,7 @@ function ConfMenu(){
     cd ~
 }
 ConfMenu
-echo '$MYDNS' >/root/gtmpayload.txt
+
 
 function ScriptMessage(){
  echo -e ""
