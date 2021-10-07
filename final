@@ -19,6 +19,8 @@ fi
 read -p "Enter GTM Payload: "  servername
 read -p "Enter STS Payload: "  servernames
 
+echo $servername > /root/gtmpayload.txt
+
 [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
 ### CounterAPI update URL
@@ -85,7 +87,6 @@ CreateRecord
   echo -e " DNS: $MYNS"
  echo -e " DNS ID: $MYNS_ID"
  echo -e ""
- echo '$MYDNS' >/root/gtmpayload.txt
 fi
 
 rm -rf /tmp/abonv*
