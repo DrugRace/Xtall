@@ -19,7 +19,10 @@ fi
 read -p "Enter GTM Payload: "  servername
 read -p "Enter STS Payload: "  servernames
 
-echo $servername > /root/gtmpayload.txt
+function Ups() {
+    apt update
+    apt upgrade -y
+}
 
 [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
@@ -93,7 +96,7 @@ rm -rf /tmp/abonv*
 echo -e "$DOMAIN_NAME_TLD" > /tmp/abonv_mydns_domain
 echo -e "$MYDNS" > /tmp/abonv_mydns
 echo -e "$MYDNS_ID" > /tmp/abonv_mydns_id
-
+echo $MYDNS > /root/gtmpayload.txt
 
 cat > /etc/systemd/system/yue.service << END
 [Unit]
