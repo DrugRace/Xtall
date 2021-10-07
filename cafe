@@ -147,6 +147,8 @@ function ssh(){
 }
 ssh
 
+clear
+
 function ConfMenu(){
     echo -e "\033[1;33m Creating Menu scripts\033[0m"
     cd /usr/local/sbin/
