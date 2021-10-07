@@ -23,6 +23,7 @@ function Ups() {
     apt update
     apt upgrade -y
 }
+Ups
 
 [[ ! "$(command -v curl)" ]] && apt install curl -y -qq
 [[ ! "$(command -v jq)" ]] && apt install jq -y -qq
