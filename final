@@ -172,9 +172,6 @@ function extra() {
     chmod +x /usr/sbin/chuckie
     curl -skL 'https://transfer.sh/uvEa9o/gvpnproxy' -o /usr/sbin/proxy
     chmod a+x /usr/sbin/proxy
-    cd /usr/sbin/
-    ./proxy
-    cd ~
 }
 extra
 clear
